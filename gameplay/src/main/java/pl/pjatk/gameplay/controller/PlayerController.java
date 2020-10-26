@@ -19,7 +19,7 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<List<Player>> findAll() {
         return ResponseEntity.ok(playerService.findAll());
     }
