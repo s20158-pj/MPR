@@ -28,15 +28,13 @@ public class PlayerController {
         Optional<Player> byId = playerService.findByID(id);
         if (byId.isPresent()) {
             return ResponseEntity.ok(byId);
-        }
-        else {
+        } else {
             return ResponseEntity.notFound().build();
         }
+    }
 
         @PostMapping
-                public ResponseEntity<Player> save(@RequestBody Player player){
+        public ResponseEntity<Player> save(@RequestBody Player player){
             return ResponseEntity.ok(playerService.save(player));
         }
-
     }
-}
