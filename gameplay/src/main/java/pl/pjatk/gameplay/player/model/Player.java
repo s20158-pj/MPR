@@ -1,14 +1,21 @@
-package pl.pjatk.gameplay.model;
+package pl.pjatk.gameplay.player.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Player {
 
-    private int id;
+    @Id
+    @GeneratedValue
+    private Long id;
     private String nickname;
     private int health;
     private int attack;
     private int mana;
 
-    public Player(int id, String nickname, int health, int attack, int mana) {
+    public Player(Long id, String nickname, int health, int attack, int mana) {
         this.id = id;
         this.nickname = nickname;
         this.health = health;
@@ -26,11 +33,11 @@ public class Player {
     public Player() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
