@@ -34,8 +34,14 @@ public class PlayerService {
 
     public Player update(Long id, Player updatedPlayer){
 //        updatedPlayer.setId(id);
-        if (findByID(updatedPlayer.getId()).isPresent()) {
-            return playerRepository.save(updatedPlayer);
+        Optional<Player> playerOptional = playerRepository.findById(id);
+        if (playerOptional.isPresent()) {
+            Player player = playerOptional.get();
+            player.setNickname(updatedPlayer.getNickname());
+            player.setAttack(updatedPlayer.getAttack());
+            player.setHealth(updatedPlayer.getHealth());
+            player.setMana(updatedPlayer.getMana());
+            return playerRepository.save(player);
         } else {
             return null;
         }
