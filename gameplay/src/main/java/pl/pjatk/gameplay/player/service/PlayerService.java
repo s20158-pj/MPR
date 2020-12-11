@@ -21,7 +21,11 @@ public class PlayerService {
         }
 
     public Optional<Player> findByID(Long id){
-        return playerRepository.findById(id);
+        if (id == 10) {
+            throw new RuntimeException();
+        } else {
+            return playerRepository.findById(id);
+        }
     }
 
     public Player save(Player player) {
