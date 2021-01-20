@@ -94,7 +94,7 @@ public class DamageServiceTest {
         damageService.poison(player);
         damageService.poison(player);
         //then
-        assertThat(player.getAttack()).isLessThan(startHealth - 5);
+        assertThat(player.getHealth()).isLessThan(startHealth - 5);
     }
 
     @Test
