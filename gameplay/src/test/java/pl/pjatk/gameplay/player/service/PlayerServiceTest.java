@@ -53,7 +53,7 @@ class PlayerServiceTest {
         // when
         List<Player> all = playerService.findAll();
         // then
-        assertThat(all).isEmpty();
+        assertThat(all).isNotEmpty();
     }
 
     @Test

@@ -11,9 +11,11 @@ import java.util.Optional;
 public class PlayerService {
 
     private PlayerRepository playerRepository;
+    private DamageService damageService;
 
-    public PlayerService(PlayerRepository playerRepository) {
+    public PlayerService(PlayerRepository playerRepository, DamageService damageService) {
         this.playerRepository = playerRepository;
+        this.damageService = damageService;
     }
 
     public List<Player> findAll(){
@@ -38,16 +40,29 @@ public class PlayerService {
 
     public Player update(Long id, Player updatedPlayer){
 //        updatedPlayer.setId(id);
-        Optional<Player> playerOptional = playerRepository.findById(id);
-        if (playerOptional.isPresent()) {
-            Player player = playerOptional.get();
-            player.setNickname(updatedPlayer.getNickname());
-            player.setAttack(updatedPlayer.getAttack());
-            player.setHealth(updatedPlayer.getHealth());
-            player.setMana(updatedPlayer.getMana());
-            return playerRepository.save(player);
+        if (findByID(updatedPlayer.getId()).isPresent()) {
+            return playerRepository.save(updatedPlayer);
         } else {
             return null;
         }
+//        Optional<Player> playerOptional = playerRepository.findById(id);
+//        if (playerOptional.isPresent()) {
+//            Player player = playerOptional.get();
+//            player.setNickname(updatedPlayer.getNickname());
+//            player.setAttack(updatedPlayer.getAttack());
+//            player.setHealth(updatedPlayer.getHealth());
+//            player.setMana(updatedPlayer.getMana());
+//            return playerRepository.save(player);
+//        } else {
+//            return null;
+//        }
+    }
+
+    public Player attack(Long attackerId, Long defenderId) {
+        Player attacker = findByID(attackerId).get();
+        Player defender = findByID(defenderId).get();
+        defender = damageService.attack(attacker, defender);
+        playerRepository.save(defender);
+        return defender;
     }
 }

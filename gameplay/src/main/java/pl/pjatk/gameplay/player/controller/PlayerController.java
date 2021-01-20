@@ -26,6 +26,11 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.findAll());
     }
 
+    @GetMapping("/test")
+    public ResponseEntity<String> findString() {
+        return ResponseEntity.ok("Hello");
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Player>> findByID(@PathVariable Long id) {
         Optional<Player> byId = playerService.findByID(id);
