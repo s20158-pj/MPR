@@ -1,6 +1,5 @@
 package pl.pjatk.gameplay.player.service;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,14 +23,14 @@ public class PlayerServiceTestIT {
 
     @Test
     void shouldSaveToDb() {
-        Player player = new Player("nick", 100, 10, 10);
+        Player player = new Player("nick", 100, 10, 10, List.of());
         Player save = playerService.save(player);
         assertThat(save.getId()).isNotNull();
     }
 
     @Test
     void shouldThrowException() {
-        Player player = new Player("nick", 100, 10, 10);
+        Player player = new Player("nick", 100, 10, 10, List.of());
         Player save = playerService.save(player);
 
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> playerService.findByID(10L));

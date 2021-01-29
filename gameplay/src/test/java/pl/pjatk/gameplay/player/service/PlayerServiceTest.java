@@ -8,10 +8,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import pl.pjatk.gameplay.player.model.Player;
 import pl.pjatk.gameplay.player.repository.PlayerRepository;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,7 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -69,7 +64,7 @@ class PlayerServiceTest {
     @Test
     void isSaved() {
         //given
-        Player player = new Player("nick", 1, 2, 3);
+        Player player = new Player("nick", 1, 2, 3, List.of());
         Player player2 = new Player(1L, "nick", 1, 2, 3);
         when(playerRepository.save(player)).thenReturn(player2);
         //when

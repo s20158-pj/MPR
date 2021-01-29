@@ -57,6 +57,12 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.update(id, player));
     }
 
+    @GetMapping("/health/{health}/{nickname}")
+    public ResponseEntity<List<Player>> findByID(@PathVariable int health, @PathVariable String nickname) {
+        List<Player> byId = playerService.findByHealth(health, nickname);
+        return ResponseEntity.ok(byId);
+    }
+
 //    @PutMapping("/{id}/{id2}")
 //    public ResponseEntity<Player> damage(@PathVariable Long id, @PathVariable Long id2) {
 //        return ResponseEntity.ok(damageService.damage(id, id2));

@@ -1,6 +1,7 @@
 package pl.pjatk.gameplay.player.service;
 
 import org.springframework.stereotype.Service;
+import pl.pjatk.gameplay.player.model.Message;
 import pl.pjatk.gameplay.player.model.Player;
 import pl.pjatk.gameplay.player.repository.PlayerRepository;
 
@@ -31,6 +32,10 @@ public class PlayerService {
     }
 
     public Player save(Player player) {
+
+        player.getMessageList().add(new Message("Some content 1", player));
+        player.getMessageList().add(new Message("Some content 2", player));
+
         return playerRepository.save(player);
     }
 
@@ -64,5 +69,9 @@ public class PlayerService {
         defender = damageService.attack(attacker, defender);
         playerRepository.save(defender);
         return defender;
+    }
+
+    public List<Player> findByHealth(int health, String nickname) {
+        return playerRepository.findByHealthAndNickname(health, nickname);
     }
 }
