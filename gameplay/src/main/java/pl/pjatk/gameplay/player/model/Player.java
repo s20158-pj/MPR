@@ -28,6 +28,13 @@ public class Player {
         this.mana = mana;
     }
 
+    public Player(String nickname, int health, int attack, int mana) {
+        this.nickname = nickname;
+        this.health = health;
+        this.attack = attack;
+        this.mana = mana;
+    }
+
     public Player(String nickname, int health, int attack, int mana, List<Message> messageList) {
         this.nickname = nickname;
         this.health = health;

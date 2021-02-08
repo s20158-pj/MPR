@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import pl.pjatk.gameplay.player.model.Player;
 import pl.pjatk.gameplay.player.service.PlayerService;
 
 import static org.hamcrest.Matchers.containsString;
@@ -44,9 +45,11 @@ public class PlayerControllerTestIT {
 
     @Test
     void shouldMatchContent2() throws Exception {
+        playerService.save(new Player("nick", 1, 2, 3));
+
         mockMvc.perform(get("/player/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("")));
+                .andExpect(content().string(containsString("{\"id\":1,\"nickname\":\"nick\",\"health\":1,\"attack\":2,\"mana\":3,\"messageList\":[{\"content\":\"Some content 1\"},{\"content\":\"Some content 2\"}]}")));
     }
 }
